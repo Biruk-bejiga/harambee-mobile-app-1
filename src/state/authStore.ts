@@ -78,4 +78,3 @@ const createAuthStore: StateCreator<AuthState> = (set) => ({
 });
 
 export const useAuthStore = create<AuthState>()(createAuthStore);
-*** End Patch

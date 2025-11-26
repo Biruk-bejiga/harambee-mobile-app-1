@@ -100,4 +100,3 @@ export const fetchPayments = async (): Promise<PaymentItem[]> => {
     }
   ];
 };
-*** End Patch
