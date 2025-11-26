@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen } from 'src/screens/app/HomeScreen';
+import { HomeNavigator } from 'src/navigation/stacks/HomeNavigator';
 import { GradesScreen } from 'src/screens/app/GradesScreen';
 import { CoursesScreen } from 'src/screens/app/CoursesScreen';
 import { PaymentsScreen } from 'src/screens/app/PaymentsScreen';
@@ -32,7 +32,7 @@ export const TabsNavigator = () => (
       )
     })}
   >
-    <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="Home" component={HomeNavigator} />
     <Tab.Screen name="Grades" component={GradesScreen} />
     <Tab.Screen name="Courses" component={CoursesScreen} />
     <Tab.Screen name="Payments" component={PaymentsScreen} />
