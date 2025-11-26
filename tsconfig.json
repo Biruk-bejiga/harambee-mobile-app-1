@@ -3,7 +3,11 @@
   "compilerOptions": {
     "allowJs": false,
     "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "resolveJsonModule": true,
@@ -11,6 +15,14 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
-    "types": ["nativewind/types"]
-  }
+    "types": [
+      "nativewind/types"
+    ]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
 }
