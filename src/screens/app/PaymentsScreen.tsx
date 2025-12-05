@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GradientHeader } from 'src/components/GradientHeader';
-import { fetchPayments, PaymentItem } from 'src/supabase/api';
+import { GradientHeader } from '../../components/GradientHeader';
+import { fetchPayments, PaymentItem } from '../../supabase/api';
 
 export const PaymentsScreen = () => {
   const [payments, setPayments] = useState<PaymentItem[]>([]);

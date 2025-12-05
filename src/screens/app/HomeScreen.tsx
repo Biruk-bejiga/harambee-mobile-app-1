@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GradientHeader } from 'src/components/GradientHeader';
-import { StatCard } from 'src/components/StatCard';
-import { QuickActionButton } from 'src/components/QuickActionButton';
-import { DashboardMetrics, fetchDashboard } from 'src/supabase/api';
-import { useAuthStore } from 'src/state/authStore';
+import { GradientHeader } from '../../components/GradientHeader';
+import { StatCard } from '../../components/StatCard';
+import { QuickActionButton } from '../../components/QuickActionButton';
+import { DashboardMetrics, fetchDashboard } from '../../supabase/api';
+import { useAuthStore } from '../../state/authStore';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HomeStackParamList } from 'src/navigation/stacks/HomeNavigator';
+import { HomeStackParamList } from '../../navigation/stacks/HomeNavigator';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export const HomeScreen = () => {

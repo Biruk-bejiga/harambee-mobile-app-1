@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GradientHeader } from 'src/components/GradientHeader';
-import { useAuthStore } from 'src/state/authStore';
+import { GradientHeader } from '../../components/GradientHeader';
+import { useAuthStore } from '../../state/authStore';
 
 const gradeData = [
   { course: 'Financial Accounting III', code: 'ACCT3022', credit: 3, grade: 'A', points: 4 },

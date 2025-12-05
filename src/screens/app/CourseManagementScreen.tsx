@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GradientHeader } from 'src/components/GradientHeader';
+import { GradientHeader } from '../../components/GradientHeader';
 import { useNavigation } from '@react-navigation/native';
 
 export const CourseManagementScreen = () => {

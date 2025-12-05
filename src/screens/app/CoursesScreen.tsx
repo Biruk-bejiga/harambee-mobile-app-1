@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { GradientHeader } from 'src/components/GradientHeader';
-import { Course, fetchCourses } from 'src/supabase/api';
+import { GradientHeader } from '../../components/GradientHeader';
+import { Course, fetchCourses } from '../../supabase/api';
 
 export const CoursesScreen = () => {
   const [courses, setCourses] = useState<Course[]>([]);

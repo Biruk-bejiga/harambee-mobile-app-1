@@ -3,8 +3,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthStackParamList } from 'src/navigation/stacks/AuthNavigator';
-import { supabase } from 'src/supabase/supabaseClient';
+import { AuthStackParamList } from '../../navigation/stacks/AuthNavigator';
+import { supabase } from '../../supabase/supabaseClient';
 
 export const ForgotPasswordScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AuthStackParamList>>();

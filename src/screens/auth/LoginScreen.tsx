@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
-import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-// import { AuthStackParamList } from 'src/navigation/stacks/AuthNavigator';
 import { useNavigation } from '@react-navigation/native';
 import { AuthStackParamList } from '../../navigation/stacks/AuthNavigator';
 import { useAuthStore } from '../../state/authStore';
-// import { useAuthStore } from '../../state/authStore';
-// import { useAuthStore } from '../state/authStore';
-
-const gradient = require('assets/splash.png');
+import { LinearGradient } from 'expo-linear-gradient';
 
 type LoginScreenNavigation = NativeStackNavigationProp<AuthStackParamList, 'Login'>;
 
@@ -26,8 +22,8 @@ export const LoginScreen = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-midnight">
-      <ImageBackground source={gradient} className="flex-1" resizeMode="cover">
-        <View className="flex-1 bg-midnight/80 px-6 justify-center">
+      <LinearGradient colors={['#4C1D95', '#0F172A']} className="flex-1">
+        <View className="flex-1 bg-midnight/75 px-6 justify-center">
           <View className="mb-12 items-center">
             <Text className="text-white text-4xl font-black mb-2">HU</Text>
             <Text className="text-white text-lg tracking-widest">HARAMBEE UNIVERSITY</Text>
@@ -74,7 +70,7 @@ export const LoginScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </ImageBackground>
+      </LinearGradient>
     </SafeAreaView>
   );
 };
