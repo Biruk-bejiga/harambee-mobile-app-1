@@ -1,11 +1,17 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeNavigator } from 'src/navigation/stacks/HomeNavigator';
-import { GradesScreen } from 'src/screens/app/GradesScreen';
-import { CoursesScreen } from 'src/screens/app/CoursesScreen';
-import { PaymentsScreen } from 'src/screens/app/PaymentsScreen';
-import { ProfileScreen } from 'src/screens/app/ProfileScreen';
-import { Icon } from 'src/components/Icon';
+import { HomeNavigator } from '../stacks/HomeNavigator';
+import { GradesScreen } from '../../screens/app/GradesScreen';
+import { CoursesScreen } from '../../screens/app/CoursesScreen';
+import { PaymentsScreen } from '../../screens/app/PaymentsScreen';
+import { ProfileScreen } from '../../screens/app/ProfileScreen';
+import { Icon } from '../../components/Icon';
+// import { HomeNavigator } from 'src/navigation/stacks/HomeNavigator';
+// import { GradesScreen } from 'src/screens/app/GradesScreen';
+// import { CoursesScreen } from 'src/screens/app/CoursesScreen';
+// import { PaymentsScreen } from 'src/screens/app/PaymentsScreen';
+// import { ProfileScreen } from 'src/screens/app/ProfileScreen';
+// import { Icon } from 'src/components/Icon';
 
 export type TabParamList = {
   Home: undefined;

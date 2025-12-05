@@ -5,13 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "harambeeportal",
-    "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "cover",
-      "backgroundColor": "#0F172A"
-    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
@@ -22,15 +16,10 @@
     },
     "android": {
       "package": "com.harambee.portal",
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#0F172A"
-      },
       "permissions": []
     },
     "web": {
-      "bundler": "metro",
-      "favicon": "./assets/favicon.png"
+      "bundler": "metro"
     },
     "plugins": [
       "expo-router",

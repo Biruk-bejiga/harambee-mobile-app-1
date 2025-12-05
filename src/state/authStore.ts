@@ -1,6 +1,8 @@
 import { StateCreator, create } from 'zustand';
-import { supabase } from 'src/supabase/supabaseClient';
-import { UserRole } from 'src/supabase/api';
+import { UserRole } from '../supabase/api';
+import { supabase } from '../supabase/supabaseClient';
+// import { supabase } from 'src/supabase/supabaseClient';
+// import { UserRole } from 'src/supabase/api';
 
 export type AuthUser = {
   id: string;

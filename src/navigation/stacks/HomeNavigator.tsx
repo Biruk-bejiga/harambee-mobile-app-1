@@ -1,9 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from 'src/screens/app/HomeScreen';
-import { CourseManagementScreen } from 'src/screens/app/CourseManagementScreen';
-import { DepartmentScreen } from 'src/screens/app/DepartmentScreen';
-import { DropoutScreen } from 'src/screens/app/DropoutScreen';
+import { HomeScreen } from '../../screens/app/HomeScreen';
+import { DepartmentScreen } from '../../screens/app/DepartmentScreen';
+import { DropoutScreen } from '../../screens/app/DropoutScreen';
+import { CourseManagementScreen } from '../../screens/app/CourseManagementScreen';
+// import { HomeScreen } from 'src/screens/app/HomeScreen';
+// import { CourseManagementScreen } from 'src/screens/app/CourseManagementScreen';
+// import { DepartmentScreen } from 'src/screens/app/DepartmentScreen';
+// import { DropoutScreen } from 'src/screens/app/DropoutScreen';
 
 export type HomeStackParamList = {
   Home: undefined;

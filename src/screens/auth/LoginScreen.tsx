@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { ImageBackground, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { AuthStackParamList } from 'src/navigation/stacks/AuthNavigator';
+// import { AuthStackParamList } from 'src/navigation/stacks/AuthNavigator';
 import { useNavigation } from '@react-navigation/native';
-import { useAuthStore } from 'src/state/authStore';
+import { AuthStackParamList } from '../../navigation/stacks/AuthNavigator';
+import { useAuthStore } from '../../state/authStore';
+// import { useAuthStore } from '../../state/authStore';
+// import { useAuthStore } from '../state/authStore';
 
 const gradient = require('assets/splash.png');
 

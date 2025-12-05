@@ -1,8 +1,9 @@
 
 import { NavigationContainer } from '@react-navigation/native';
-import { ThemeProvider } from 'src/theme/ThemeProvider';
-import { RootNavigator } from 'src/navigation/RootNavigator';
+
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { RootNavigator } from './src/navigation/RootNavigator';
+import { ThemeProvider } from './src/theme/ThemeProvider';
 
 const App = () => {
   return (
