@@ -49,9 +49,15 @@ export const TabsNavigator = () => {
     })}
   >
     <Tab.Screen name="Home" component={HomeNavigator} />
-    <Tab.Screen name="Grades" component={GuardedGrades} />
-    <Tab.Screen name="Courses" component={GuardedCourses} />
-    <Tab.Screen name="Payments" component={GuardedPayments} />
+    {['student', 'teacher'].includes(role) && (
+      <Tab.Screen name="Grades" component={GuardedGrades} />
+    )}
+    {['student', 'teacher'].includes(role) && (
+      <Tab.Screen name="Courses" component={GuardedCourses} />
+    )}
+    {['student', 'admin', 'registrar'].includes(role) && (
+      <Tab.Screen name="Payments" component={GuardedPayments} />
+    )}
     <Tab.Screen name="Profile" component={GuardedProfile} />
   </Tab.Navigator>
   );
