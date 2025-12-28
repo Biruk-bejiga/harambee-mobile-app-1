@@ -21,31 +21,35 @@ export const HomeScreen = () => {
     fetchDashboard().then(setMetrics);
   }, []);
 
-  const quickActions = useMemo(
-    () => [
+  const quickActions = useMemo(() => {
+    const actions = [
       {
         label: 'View Grades',
         icon: 'Grades',
-        onPress: () => parentNav?.navigate('Grades')
+        onPress: () => parentNav?.navigate('Grades'),
+        roles: ['student', 'teacher']
       },
       {
         label: 'Payments',
         icon: 'Payments',
-        onPress: () => parentNav?.navigate('Payments')
+        onPress: () => parentNav?.navigate('Payments'),
+        roles: ['student', 'admin', 'registrar']
       },
       {
         label: 'Add / Drop Course',
         icon: 'CourseManagement',
-        onPress: () => navigation.navigate('CourseManagement')
+        onPress: () => navigation.navigate('CourseManagement'),
+        roles: ['student', 'registrar']
       },
       {
         label: 'Department',
         icon: 'Department',
-        onPress: () => navigation.navigate('Department')
+        onPress: () => navigation.navigate('Department'),
+        roles: ['head', 'admin']
       }
-    ],
-    [navigation, parentNav]
-  );
+    ];
+    return actions.filter((a) => a.roles.includes(role));
+  }, [navigation, parentNav, role]);
 
   const roleHighlights: Record<string, { title: string; description: string }> = {
     admin: {
