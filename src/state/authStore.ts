@@ -1,5 +1,5 @@
 import { StateCreator, create } from 'zustand';
-import { UserRole } from '../supabase/api';
+import { UserRole, fetchUserRole } from '../supabase/api';
 import { supabase } from '../supabase/supabaseClient';
 // import { supabase } from 'src/supabase/supabaseClient';
 // import { UserRole } from 'src/supabase/api';
@@ -43,7 +43,8 @@ const createAuthStore: StateCreator<AuthState> = (set) => ({
         department: data.user.user_metadata?.department ?? 'Accounting and Finance'
       } satisfies AuthUser;
 
-      const role = (data.user.app_metadata?.role as UserRole) ?? 'student';
+      const profileRole = await fetchUserRole(data.user.id);
+      const role = profileRole ?? ((data.user.app_metadata?.role as UserRole) ?? 'student');
 
       set({ isAuthenticated: true, user: profile, role, isLoading: false });
     } catch (error) {
@@ -70,7 +71,9 @@ const createAuthStore: StateCreator<AuthState> = (set) => ({
           studentId: session.user.user_metadata?.studentId ?? 'STD2025001',
           department: session.user.user_metadata?.department ?? 'Accounting and Finance'
         },
-        role: (session.user.app_metadata?.role as UserRole) ?? 'student',
+        role:
+          (await fetchUserRole(session.user.id)) ??
+          ((session.user.app_metadata?.role as UserRole) ?? 'student'),
         isLoading: false
       });
     } else {
