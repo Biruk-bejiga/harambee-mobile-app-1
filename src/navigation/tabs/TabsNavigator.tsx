@@ -5,6 +5,8 @@ import { GradesScreen } from '../../screens/app/GradesScreen';
 import { CoursesScreen } from '../../screens/app/CoursesScreen';
 import { PaymentsScreen } from '../../screens/app/PaymentsScreen';
 import { ProfileScreen } from '../../screens/app/ProfileScreen';
+import { withRoleGuard } from '../withRoleGuard';
+import { useAuthStore } from '../../state/authStore';
 import { Icon } from '../../components/Icon';
 // import { HomeNavigator } from 'src/navigation/stacks/HomeNavigator';
 // import { GradesScreen } from 'src/screens/app/GradesScreen';
@@ -23,7 +25,15 @@ export type TabParamList = {
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
-export const TabsNavigator = () => (
+export const TabsNavigator = () => {
+  const role = useAuthStore((s) => s.role);
+
+  const GuardedGrades = withRoleGuard(['student', 'teacher'], GradesScreen);
+  const GuardedCourses = withRoleGuard(['student', 'teacher'], CoursesScreen);
+  const GuardedPayments = withRoleGuard(['student', 'admin', 'registrar'], PaymentsScreen);
+  const GuardedProfile = withRoleGuard(['student', 'teacher', 'admin', 'head', 'registrar'], ProfileScreen);
+
+  return (
   <Tab.Navigator
     screenOptions={({ route }) => ({
       headerShown: false,
@@ -39,9 +49,10 @@ export const TabsNavigator = () => (
     })}
   >
     <Tab.Screen name="Home" component={HomeNavigator} />
-    <Tab.Screen name="Grades" component={GradesScreen} />
-    <Tab.Screen name="Courses" component={CoursesScreen} />
-    <Tab.Screen name="Payments" component={PaymentsScreen} />
-    <Tab.Screen name="Profile" component={ProfileScreen} />
+    <Tab.Screen name="Grades" component={GuardedGrades} />
+    <Tab.Screen name="Courses" component={GuardedCourses} />
+    <Tab.Screen name="Payments" component={GuardedPayments} />
+    <Tab.Screen name="Profile" component={GuardedProfile} />
   </Tab.Navigator>
-);
+  );
+};

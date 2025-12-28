@@ -4,6 +4,7 @@ import { HomeScreen } from '../../screens/app/HomeScreen';
 import { DepartmentScreen } from '../../screens/app/DepartmentScreen';
 import { DropoutScreen } from '../../screens/app/DropoutScreen';
 import { CourseManagementScreen } from '../../screens/app/CourseManagementScreen';
+import { withRoleGuard } from '../withRoleGuard';
 // import { HomeScreen } from 'src/screens/app/HomeScreen';
 // import { CourseManagementScreen } from 'src/screens/app/CourseManagementScreen';
 // import { DepartmentScreen } from 'src/screens/app/DepartmentScreen';
@@ -21,8 +22,11 @@ const Stack = createNativeStackNavigator<HomeStackParamList>();
 export const HomeNavigator = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name="Home" component={HomeScreen} />
-    <Stack.Screen name="CourseManagement" component={CourseManagementScreen} />
-    <Stack.Screen name="Department" component={DepartmentScreen} />
-    <Stack.Screen name="Dropout" component={DropoutScreen} />
+    <Stack.Screen
+      name="CourseManagement"
+      component={withRoleGuard(['student', 'registrar'], CourseManagementScreen)}
+    />
+    <Stack.Screen name="Department" component={withRoleGuard(['head', 'admin'], DepartmentScreen)} />
+    <Stack.Screen name="Dropout" component={withRoleGuard(['head', 'admin'], DropoutScreen)} />
   </Stack.Navigator>
 );
