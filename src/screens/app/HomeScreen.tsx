@@ -47,6 +47,13 @@ export const HomeScreen = () => {
         onPress: () => navigation.navigate('Department'),
         roles: ['head', 'admin']
       }
+      ,
+      {
+        label: 'Role Management',
+        icon: 'Profile',
+        onPress: () => navigation.navigate('RoleManagement'),
+        roles: ['admin']
+      }
     ];
     return actions.filter((a) => a.roles.includes(role));
   }, [navigation, parentNav, role]);
