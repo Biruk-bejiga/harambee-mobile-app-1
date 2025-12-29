@@ -4,6 +4,7 @@ import { HomeScreen } from '../../screens/app/HomeScreen';
 import { DepartmentScreen } from '../../screens/app/DepartmentScreen';
 import { DropoutScreen } from '../../screens/app/DropoutScreen';
 import { CourseManagementScreen } from '../../screens/app/CourseManagementScreen';
+import { RoleManagementScreen } from '../../screens/admin/RoleManagementScreen';
 import { withRoleGuard } from '../withRoleGuard';
 // import { HomeScreen } from 'src/screens/app/HomeScreen';
 // import { CourseManagementScreen } from 'src/screens/app/CourseManagementScreen';
@@ -28,5 +29,6 @@ export const HomeNavigator = () => (
     />
     <Stack.Screen name="Department" component={withRoleGuard(['head', 'admin'], DepartmentScreen)} />
     <Stack.Screen name="Dropout" component={withRoleGuard(['head', 'admin'], DropoutScreen)} />
+    <Stack.Screen name="RoleManagement" component={withRoleGuard(['admin'], RoleManagementScreen)} />
   </Stack.Navigator>
 );
