@@ -6,6 +6,10 @@ Expo + React Native + TypeScript student portal using Supabase for auth/data, Na
 - Roles: `student`, `teacher`, `admin`, `head`, `registrar`.
 - Screens and actions are gated by role via a lightweight guard. Tabs and stack screens are wrapped to restrict access.
 
+### Admin screen
+- Role management UI is available to `admin` via Home → Role Management.
+- Lists `profiles` rows and lets admins update `role` inline.
+
 ### Supabase setup
 1. Configure environment in `app.json` under `expo.extra` with `SUPABASE_URL` and `SUPABASE_ANON_KEY` (EAS/CI env vars).
 2. Add a `profiles` table with a `role` column:
@@ -31,6 +35,24 @@ on conflict (id) do update set role = excluded.role;
 ```
 
 The app first tries `profiles.role`; if missing, it falls back to `session.user.app_metadata.role` and defaults to `student`.
+
+### Seed sample users
+Create auth users (Dashboard or CLI) and then add their profiles:
+
+```sql
+-- Replace with actual auth.users ids
+insert into public.profiles (id, full_name, role) values
+	('00000000-0000-0000-0000-000000000001', 'Student One', 'student'),
+	('00000000-0000-0000-0000-000000000002', 'Teacher Two', 'teacher'),
+	('00000000-0000-0000-0000-000000000003', 'Admin Three', 'admin'),
+	('00000000-0000-0000-0000-000000000004', 'Head Four', 'head'),
+	('00000000-0000-0000-0000-000000000005', 'Registrar Five', 'registrar')
+on conflict (id) do update set full_name = excluded.full_name, role = excluded.role;
+```
+
+Notes:
+- If using the Dashboard, create users in Authentication → Users to get their UUIDs.
+- Alternatively, sign up in the app (Login/Signup flow), then insert/update the matching `profiles` row.
 
 ## Run
 
