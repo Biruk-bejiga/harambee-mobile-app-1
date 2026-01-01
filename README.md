@@ -73,6 +73,22 @@ create policy "admin update all profiles" on public.profiles
 
 If you previously created restrictive policies, review them to ensure they don't block admin operations.
 
+### Enable partial ID search (prefix)
+Because `id` is a UUID, Postgres won't match it with `ILIKE`. Create a view that exposes `id_text` for partial matching and grant access:
+
+```sql
+create or replace view public.profiles_search as
+select id, full_name, role, id::text as id_text
+from public.profiles;
+
+grant select on public.profiles_search to authenticated;
+
+-- Optional: index to speed prefix matches (use lower(id_text) and lower() in queries if needed)
+create index if not exists profiles_id_text_idx on public.profiles ((lower(id::text)));
+```
+
+In the app, search uses `full_name ILIKE %query% OR id_text ILIKE %query%`. If the view isn't present, it falls back to exact `id = query`.
+
 ## Run
 
 ```bash
