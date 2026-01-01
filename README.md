@@ -54,6 +54,25 @@ Notes:
 - If using the Dashboard, create users in Authentication → Users to get their UUIDs.
 - Alternatively, sign up in the app (Login/Signup flow), then insert/update the matching `profiles` row.
 
+### RLS policies for admin management
+Allow admins to read and update any profile. These policies assume the logged-in user has a `profiles` row with `role = 'admin'`.
+
+```sql
+-- Admins can read all profiles
+create policy "admin read all profiles" on public.profiles
+	for select using (
+		exists(select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin')
+	);
+
+-- Admins can update any profile
+create policy "admin update all profiles" on public.profiles
+	for update using (
+		exists(select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin')
+	);
+```
+
+If you previously created restrictive policies, review them to ensure they don't block admin operations.
+
 ## Run
 
 ```bash
