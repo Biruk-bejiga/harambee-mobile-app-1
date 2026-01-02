@@ -111,6 +111,29 @@ export const HomeScreen = () => {
           </View>
         </View>
 
+        {role === 'teacher' ? (
+          <View className="bg-ash rounded-3xl p-4 mb-4">
+            <Text className="text-white text-lg font-semibold mb-3">Teacher</Text>
+            <View className="flex-row flex-wrap -m-1">
+              <QuickActionButton
+                label="Teacher Dashboard"
+                icon="Grades"
+                onPress={() => navigation.navigate('TeacherDashboard')}
+              />
+              <QuickActionButton
+                label="My Courses"
+                icon="Courses"
+                onPress={() => navigation.navigate('TeacherCourses')}
+              />
+              <QuickActionButton
+                label="Grade Submissions"
+                icon="Grades"
+                onPress={() => navigation.navigate('GradeSubmission')}
+              />
+            </View>
+          </View>
+        ) : null}
+
         {roleHighlight ? (
           <LinearGradient colors={['#8B5CF6', '#06B6D4']} className="rounded-3xl p-5 mb-4">
             <Text className="text-white text-lg font-semibold mb-1">{roleHighlight.title}</Text>
