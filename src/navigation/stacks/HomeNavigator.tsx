@@ -9,6 +9,9 @@ import { TeacherDashboardScreen } from '../../screens/teacher/TeacherDashboardSc
 import { TeacherCoursesScreen } from '../../screens/teacher/TeacherCoursesScreen';
 import { GradeSubmissionScreen } from '../../screens/teacher/GradeSubmissionScreen';
 import { withRoleGuard } from '../withRoleGuard';
+import { RegistrarDashboardScreen } from '../../screens/registrar/RegistrarDashboardScreen';
+import { AddDropRequestsScreen } from '../../screens/registrar/AddDropRequestsScreen';
+import { PaymentReviewScreen } from '../../screens/registrar/PaymentReviewScreen';
 // import { HomeScreen } from 'src/screens/app/HomeScreen';
 // import { CourseManagementScreen } from 'src/screens/app/CourseManagementScreen';
 // import { DepartmentScreen } from 'src/screens/app/DepartmentScreen';
@@ -19,6 +22,13 @@ export type HomeStackParamList = {
   CourseManagement: undefined;
   Department: undefined;
   Dropout: undefined;
+  RoleManagement: undefined;
+  TeacherDashboard: undefined;
+  TeacherCourses: undefined;
+  GradeSubmission: undefined;
+  RegistrarDashboard: undefined;
+  AddDropRequests: undefined;
+  PaymentReview: undefined;
 };
 
 const Stack = createNativeStackNavigator<HomeStackParamList>();
@@ -36,5 +46,8 @@ export const HomeNavigator = () => (
     <Stack.Screen name="TeacherDashboard" component={withRoleGuard(['teacher'], TeacherDashboardScreen)} />
     <Stack.Screen name="TeacherCourses" component={withRoleGuard(['teacher'], TeacherCoursesScreen)} />
     <Stack.Screen name="GradeSubmission" component={withRoleGuard(['teacher'], GradeSubmissionScreen)} />
+    <Stack.Screen name="RegistrarDashboard" component={withRoleGuard(['registrar'], RegistrarDashboardScreen)} />
+    <Stack.Screen name="AddDropRequests" component={withRoleGuard(['registrar'], AddDropRequestsScreen)} />
+    <Stack.Screen name="PaymentReview" component={withRoleGuard(['registrar'], PaymentReviewScreen)} />
   </Stack.Navigator>
 );
