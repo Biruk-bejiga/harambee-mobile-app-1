@@ -54,6 +54,25 @@ export const HomeScreen = () => {
         onPress: () => navigation.navigate('RoleManagement'),
         roles: ['admin']
       }
+      ,
+      {
+        label: 'Registrar Dashboard',
+        icon: 'Payments',
+        onPress: () => navigation.navigate('RegistrarDashboard'),
+        roles: ['registrar']
+      },
+      {
+        label: 'Add/Drop Requests',
+        icon: 'CourseManagement',
+        onPress: () => navigation.navigate('AddDropRequests'),
+        roles: ['registrar']
+      },
+      {
+        label: 'Payment Review',
+        icon: 'Payments',
+        onPress: () => navigation.navigate('PaymentReview'),
+        roles: ['registrar']
+      }
     ];
     return actions.filter((a) => a.roles.includes(role));
   }, [navigation, parentNav, role]);
