@@ -73,21 +73,29 @@ create policy "admin update all profiles" on public.profiles
 
 If you previously created restrictive policies, review them to ensure they don't block admin operations.
 
-### Enable partial ID search (prefix)
-Because `id` is a UUID, Postgres won't match it with `ILIKE`. Create a view that exposes `id_text` for partial matching and grant access:
+### Enable partial ID search (prefix) with LOWER()
+Because `id` is a UUID, Postgres won't match it with `ILIKE`. Create a view that exposes `id_text` and LOWER-based columns for index-friendly case-insensitive prefix matching:
 
 ```sql
 create or replace view public.profiles_search as
-select id, full_name, role, id::text as id_text
+select
+	id,
+	full_name,
+	role,
+	id::text as id_text,
+	lower(full_name) as full_name_lower,
+	lower(id::text) as id_text_lower
 from public.profiles;
 
 grant select on public.profiles_search to authenticated;
 
--- Optional: index to speed prefix matches (use lower(id_text) and lower() in queries if needed)
-create index if not exists profiles_id_text_idx on public.profiles ((lower(id::text)));
+-- Optional: expression indexes to accelerate prefix searches
+create index if not exists profiles_full_name_lower_idx on public.profiles (lower(full_name));
+create index if not exists profiles_id_text_lower_idx on public.profiles ((lower(id::text)));
 ```
 
-In the app, search uses `full_name ILIKE %query% OR id_text ILIKE %query%`. If the view isn't present, it falls back to exact `id = query`.
+In the app, search uses `full_name_lower LIKE %lower(query)% OR id_text_lower LIKE %lower(query)%` when the view exists.
+If the view isn't present, it falls back to `full_name ILIKE` and exact `id = query`.
 
 ## Run
 
