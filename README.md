@@ -99,6 +99,42 @@ create policy "teacher update own submissions" on public.pending_submissions
 	for update using (teacher_id = auth.uid());
 ```
 
+## Registrar role features
+- Screens (Home → Registrar quick actions):
+	- Registrar Dashboard: overview of pending add/drop requests, payments, approvals today.
+	- Add/Drop Requests: approve or reject course change requests.
+	- Payment Review: verify pending tuition/fee payments.
+- API tables/views (suggested):
+	- `add_drop_requests(id uuid, student_id text, student_name text, course text, action text, reason text, status text, created_at timestamptz)`
+	- `payments(id uuid, student_id text, student_name text, label text, amount numeric, date date, status text)`
+	- optional RPC `registrar_metrics(registrar_id uuid)` returning counts.
+- RLS ideas:
+	- Registrar can select pending rows for review (`status = 'pending'`).
+	- Registrar can update status to `approved|rejected` for add/drop and `verified` for payments.
+
+Example RLS policies:
+```sql
+alter table public.add_drop_requests enable row level security;
+create policy "registrar read pending add_drop" on public.add_drop_requests
+	for select using (
+		exists(select 1 from public.profiles p where p.id = auth.uid() and p.role = 'registrar') and status = 'pending'
+	);
+create policy "registrar update add_drop" on public.add_drop_requests
+	for update using (
+		exists(select 1 from public.profiles p where p.id = auth.uid() and p.role = 'registrar')
+	);
+
+alter table public.payments enable row level security;
+create policy "registrar read pending payments" on public.payments
+	for select using (
+		exists(select 1 from public.profiles p where p.id = auth.uid() and p.role = 'registrar') and status = 'pending'
+	);
+create policy "registrar verify payments" on public.payments
+	for update using (
+		exists(select 1 from public.profiles p where p.id = auth.uid() and p.role = 'registrar')
+	);
+```
+
 Because `id` is a UUID, Postgres won't match it with `ILIKE`. Create a view that exposes `id_text` and LOWER-based columns for index-friendly case-insensitive prefix matching:
 
 ```sql
