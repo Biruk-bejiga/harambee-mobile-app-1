@@ -74,6 +74,31 @@ create policy "admin update all profiles" on public.profiles
 If you previously created restrictive policies, review them to ensure they don't block admin operations.
 
 ### Enable partial ID search (prefix) with LOWER()
+## Teacher role features
+- Screens (Home → Teacher section):
+	- Teacher Dashboard: overview of courses/sections and pending grade submissions.
+	- My Courses: lists teacher’s courses/sections.
+	- Grade Submissions: show pending items and submit grades.
+- API tables/views (suggested):
+	- `teacher_courses(teacher_id uuid, code text, name text, section text, schedule text)`
+	- `pending_submissions(id uuid, teacher_id uuid, student_id text, student_name text, course text, section text, assignment text, grade text, status text)`
+- RLS ideas:
+	- Teachers can select rows where `teacher_id = auth.uid()`.
+	- Updates on `pending_submissions` allowed for their rows.
+
+Example RLS policies:
+```sql
+alter table public.teacher_courses enable row level security;
+create policy "teacher read own courses" on public.teacher_courses
+	for select using (teacher_id = auth.uid());
+
+alter table public.pending_submissions enable row level security;
+create policy "teacher read own submissions" on public.pending_submissions
+	for select using (teacher_id = auth.uid());
+create policy "teacher update own submissions" on public.pending_submissions
+	for update using (teacher_id = auth.uid());
+```
+
 Because `id` is a UUID, Postgres won't match it with `ILIKE`. Create a view that exposes `id_text` and LOWER-based columns for index-friendly case-insensitive prefix matching:
 
 ```sql
